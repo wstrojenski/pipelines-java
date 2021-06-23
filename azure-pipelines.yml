@@ -16,32 +16,27 @@ trigger:
 #       imageName: "vs2017-win2016"
 #   maxParallel: 3
 
-pool:
-  vmImage: 'ubuntu-16.04'
-
 strategy:
   matrix:
-    jdk10:
-      jdk_version: "1.10"
-    jdk18:
+    jdk10_linux:
+      imageName: "ubuntu-latest"
       jdk_version: "1.8"
+    jdk11_windows:
+      imageName: "vs2017-win2016"
+      jdk_version: "1.7"
   maxParallel: 2
+
+pool:
+  vmImage: $(imageName)
 
 steps:
 - task: Maven@3
   inputs:
-    mavenPomFile: 'pom.xml'
-    mavenOptions: '-Xmx3072m'
-    javaHomeOption: 'JDKVersion'
+    mavenPomFile: "pom.xml"
+    mavenOptions: "-Xmx3072m"
+    javaHomeOption: "JDKVersion"
     jdkVersionOption: $(jdk_version)
-    jdkArchitectureOption: 'x64'
+    jdkArchitectureOption: "x64"
     publishJUnitResults: true
-    testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    goals: 'package'
-- task: PublishCodeCoverageResults@1
-  inputs:
-    codeCoverageTool: "JaCoCo"
-    summaryFileLocation: "$(System.DefaultWorkingDirectory)/**/site/jacoco/jacoco.xml"
-    reportDirectory: "$(System.DefaultWorkingDirectory)/**/site/jacoco"
-    failIfCoverageEmpty: true
-
+    testResultsFiles: "**/TEST-*.xml"
+    goals: "package"

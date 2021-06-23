@@ -1,3 +1,4 @@
+[![Build Status](https://dev.azure.com/wojtekstrojenski/pipelines-java/_apis/build/status/wstrojenski.pipelines-java?branchName=master)](https://dev.azure.com/wojtekstrojenski/pipelines-java/_build/latest?definitionId=13&branchName=master)
 
 # Contributing
 

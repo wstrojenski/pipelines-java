@@ -23,7 +23,7 @@ strategy:
       jdk_version: "1.8"
     jdk11_windows:
       imageName: "vs2017-win2016"
-      jdk_version: "1.7"
+      jdk_version: "1.8"
   maxParallel: 2
 
 pool:

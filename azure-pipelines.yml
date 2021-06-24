@@ -18,10 +18,10 @@ trigger:
 
 strategy:
   matrix:
-    jdk10_linux:
+    jdk18_linux:
       imageName: "ubuntu-latest"
       jdk_version: "1.8"
-    jdk11_windows:
+    jdk18_windows:
       imageName: "vs2017-win2016"
       jdk_version: "1.8"
   maxParallel: 2
@@ -40,3 +40,9 @@ steps:
     publishJUnitResults: true
     testResultsFiles: "**/TEST-*.xml"
     goals: "package"
+- task: PublishCodeCoverageResults@1
+  inputs:
+    codeCoverageTool: "JaCoCo"
+    summaryFileLocation: "$(System.DefaultWorkingDirectory)/**/site/jacoco/jacoco.xml"
+    reportDirectory: "$(System.DefaultWorkingDirectory)/**/site/jacoco"
+    failIfCoverageEmpty: true
